@@ -29,6 +29,7 @@ public class BannerScene : MonoBehaviour, BannerListener {
     /// </summary>
     /// TODO change to your own configured placement.
     public const String BannerPlacementName = "197407";
+    AndroidJavaObject keyboardPopupListener;
 
     /// <summary>
     /// Helper for managing the user interface
@@ -65,6 +66,7 @@ public class BannerScene : MonoBehaviour, BannerListener {
     /// </summary>
     private void setFairBidBannerListener() {
         Banner.SetBannerListener(this);
+        keyboardPopupListener = new AndroidJavaObject("com.fyber.fairbid.keyboardbannerhelper.KeyboardPopupListener", BannerPlacementName, new KeyboardCallbackListener());
     }
 
     #region BannerListener
@@ -96,6 +98,7 @@ public class BannerScene : MonoBehaviour, BannerListener {
     public void OnShow(string placementName, ImpressionData impressionData)
     {
         mUserInterfaceWrapper.addLog("OnShow()");
+        keyboardPopupListener.Call("attach");
     }
 
     /// <summary>
@@ -149,5 +152,6 @@ public class BannerScene : MonoBehaviour, BannerListener {
     public void DestroyBannerScene() {
         Banner.Destroy(BannerPlacementName);
         SceneManager.LoadScene("MainScreen");
+        keyboardPopupListener.Call("attach");
     }
 }
