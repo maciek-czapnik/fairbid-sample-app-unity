@@ -17,6 +17,13 @@ allprojects {
         flatDir {
             dirs 'libs'
         }
+        maven {
+            name "HyprMX's maven repo"
+            url 'https://hyprmx.jfrog.io/artifactory/hyprmx'
+            content {
+                includeGroup("com.hyprmx.android")
+            }
+        }
     }
 }
 
@@ -27,6 +34,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.5.10'
     implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+    implementation 'com.hyprmx.android:HyprMX-SDK:6.0.0'
 **DEPS**
 }
 
